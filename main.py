@@ -2,25 +2,25 @@ import streamlit as st
 import random
 
 st.set_page_config(
-    page_title="PT 헬스 루틴 생성기",
+    page_title="헬스 루틴 + 운동 설명",
     page_icon="💪"
 )
 
-st.title("💪 디테일 헬스 루틴 생성기")
-st.subheader("🔥 진짜 PT처럼 부위별 제대로 조지기")
+st.title("💪 헬스 루틴 + 운동 설명")
+st.subheader("🔥 운동 방법까지 완벽하게!")
 
 st.markdown("---")
 
-level = st.selectbox("📊 운동 수준 선택", ["초급 🐣", "중급 🐥", "고급 🦅"])
-part = st.selectbox("🏋️ 운동 부위 선택", ["가슴 🟥", "등 🟦", "하체 🟩", "어깨 🟨", "팔 💪", "복근 🟧"])
+level = st.selectbox("📊 운동 수준", ["초급 🐣", "중급 🐥", "고급 🦅"])
+part = st.selectbox("🏋️ 운동 부위", ["가슴 🟥", "어깨 🟨", "등 🟦", "팔 💪"])
 
 arm_part = None
 if part == "팔 💪":
-    arm_part = st.radio("💪 팔 부위 선택", ["이두 💪", "삼두 🔥"])
+    arm_part = st.radio("💪 선택", ["이두 💪", "삼두 🔥"])
 
 st.markdown("---")
 
-# 🔥 세트 설정
+# 세트
 if "초급" in level:
     reps = "10회 × 3세트"
     lv = "초급"
@@ -31,132 +31,102 @@ else:
     reps = "15회 × 5세트"
     lv = "고급"
 
-# 🔥 가슴 (윗/중앙/아랫)
-chest = {
-"윗가슴":{
-"초급":["인클라인 머신 프레스"],
-"중급":["인클라인 덤벨 프레스"],
-"고급":["인클라인 바벨 프레스"]
+# 🔥 운동 데이터 (설명 + 이미지 포함)
+exercise_info = {
+
+"벤치프레스":{
+"desc":"가슴 중앙을 자극하는 대표 운동. 가슴으로 밀어내는 느낌 중요!",
+"img":"https://images.unsplash.com/photo-1599058917212-d750089bc07e"
 },
-"중앙":{
-"초급":["머신 체스트 프레스"],
-"중급":["벤치프레스"],
-"고급":["덤벨 벤치프레스"]
+
+"인클라인 덤벨 프레스":{
+"desc":"윗가슴을 집중적으로 자극하는 운동",
+"img":"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61"
 },
-"아랫가슴":{
-"초급":["디클라인 푸쉬업"],
-"중급":["딥스"],
-"고급":["디클라인 벤치프레스"]
-}
+
+"딥스":{
+"desc":"아랫가슴과 삼두를 동시에 자극",
+"img":"https://images.unsplash.com/photo-1594737625785-cb0bbd6c7c63"
+},
+
+"사이드 레터럴 레이즈":{
+"desc":"어깨 측면을 넓게 만들어주는 핵심 운동",
+"img":"https://images.unsplash.com/photo-1605296867304-46d5465a13f1"
+},
+
+"프론트 레이즈":{
+"desc":"어깨 전면 발달",
+"img":"https://images.unsplash.com/photo-1581009137042-c552e485697a"
+},
+
+"리어 델트 플라이":{
+"desc":"어깨 후면 자극 (자세 중요!)",
+"img":"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b"
+},
+
+"랫풀다운":{
+"desc":"광배근을 넓게 만드는 기본 운동",
+"img":"https://images.unsplash.com/photo-1598970434795-0c54fe7c0642"
+},
+
+"바벨 로우":{
+"desc":"등 두께를 키워주는 운동",
+"img":"https://images.unsplash.com/photo-1605296867724-fa87a8ef7d12"
+},
+
+"덤벨 컬":{
+"desc":"이두근 기본 운동",
+"img":"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e"
+},
+
+"트라이셉스 푸쉬다운":{
+"desc":"삼두를 키우는 대표 운동",
+"img":"https://images.unsplash.com/photo-1605296867424-35fc25c9212a"
 }
 
-# 🔥 어깨 (전/측/후)
-shoulder = {
-"전면":{
-"초급":["프론트 레이즈"],
-"중급":["덤벨 숄더 프레스"],
-"고급":["아놀드 프레스"]
-},
-"측면":{
-"초급":["사이드 레터럴 레이즈"],
-"중급":["덤벨 레터럴 레이즈"],
-"고급":["케이블 레터럴 레이즈"]
-},
-"후면":{
-"초급":["리어 델트 머신"],
-"중급":["리어 델트 플라이"],
-"고급":["벤트오버 레터럴 레이즈"]
-}
 }
 
-# 🔥 등 (광배 / 중앙)
-back = {
-"광배":{
-"초급":["랫풀다운"],
-"중급":["풀업"],
-"고급":["와이드 풀업"]
-},
-"중앙":{
-"초급":["시티드 로우"],
-"중급":["바벨 로우"],
-"고급":["티바 로우"]
-}
-}
-
-# 🔥 팔
-arm = {
-"이두 💪":{
-"초급":["덤벨 컬"],
-"중급":["바벨 컬"],
-"고급":["프리처 컬"]
-},
-"삼두 🔥":{
-"초급":["벤치 딥스"],
-"중급":["트라이셉스 푸쉬다운"],
-"고급":["스컬 크러셔"]
-}
-}
-
-# 🔥 하체 / 복근
-lower = {
-"하체 🟩":["스쿼트","런지","레그 프레스","레그 컬"],
-"복근 🟧":["크런치","플랭크","레그 레이즈","러시안 트위스트"]
-}
-
-# 🚀 실행
+# 루틴
 if st.button("🚀 루틴 생성"):
 
     st.balloons()
 
-    st.markdown("## 💪 오늘의 운동 루틴")
+    st.markdown("## 💪 오늘의 운동")
+
+    routine = []
 
     # 가슴
     if part == "가슴 🟥":
-        st.markdown("### 🟥 가슴 (상/중/하 균형)")
-
-        for k in chest:
-            ex = random.choice(chest[k][lv])
-            st.write(f"🏋️ {k} : {ex} - {reps}")
+        routine = ["인클라인 덤벨 프레스", "벤치프레스", "딥스"]
 
     # 어깨
     elif part == "어깨 🟨":
-        st.markdown("### 🟨 어깨 (전/측/후 균형)")
-
-        for k in shoulder:
-            ex = random.choice(shoulder[k][lv])
-            st.write(f"🏋️ {k} : {ex} - {reps}")
+        routine = ["프론트 레이즈", "사이드 레터럴 레이즈", "리어 델트 플라이"]
 
     # 등
     elif part == "등 🟦":
-        st.markdown("### 🟦 등 (광배 + 중앙)")
-
-        for k in back:
-            ex = random.choice(back[k][lv])
-            st.write(f"🏋️ {k} : {ex} - {reps}")
-
-        # 하나 더 추가
-        extra = random.choice(back["중앙"][lv])
-        st.write(f"🔥 추가 : {extra} - {reps}")
+        routine = ["랫풀다운", "바벨 로우"]
 
     # 팔
     elif part == "팔 💪":
-        st.markdown(f"### 💪 {arm_part}")
+        if arm_part == "이두 💪":
+            routine = ["덤벨 컬"]
+        else:
+            routine = ["트라이셉스 푸쉬다운"]
 
-        for ex in arm[arm_part][lv]:
-            st.write(f"🏋️ {ex} - {reps}")
+    # 출력
+    for ex in routine:
 
-    # 하체 / 복근
-    else:
-        st.markdown(f"### {part}")
+        st.markdown(f"### 🏋️ {ex}")
+        st.write(f"👉 {reps}")
 
-        for ex in random.sample(lower[part], 3):
-            st.write(f"🏋️ {ex} - {reps}")
+        st.image(exercise_info[ex]["img"], width=300)
 
-    st.markdown("---")
+        st.info(exercise_info[ex]["desc"])
 
-    st.info("⚠️ 부위 자극 느끼는 게 가장 중요합니다!")
+        st.markdown("---")
 
-    st.success("🔥 오늘 운동 완료! 근성장 +1")
+    st.success("🔥 자세까지 완벽하면 진짜 성장 시작이다!")
 
 st.markdown("---")
-st.caption("💪 PT 디테일 루틴 생성기")
+st.caption("💪 운동 설명 포함 헬스 앱")
