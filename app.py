@@ -1,11 +1,1 @@
-images/
-  bench.png
-  incline.png
-  dips.png
-  lateral.png
-  front.png
-  rear.png
-  latpulldown.png
-  row.png
-  curl.png
-  triceps.png
+
