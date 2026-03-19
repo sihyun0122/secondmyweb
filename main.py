@@ -1,13 +1,12 @@
 import streamlit as st
-import random
 
 st.set_page_config(
     page_title="헬스 루틴 + 운동 설명",
     page_icon="💪"
 )
 
-st.title("💪 헬스 루틴 + 운동 설명")
-st.subheader("🔥 운동 방법까지 완벽하게!")
+st.title("💪 헬스 루틴 생성기")
+st.subheader("🔥 운동 방법까지 완벽하게 배우기")
 
 st.markdown("---")
 
@@ -20,94 +19,138 @@ if part == "팔 💪":
 
 st.markdown("---")
 
-# 세트
+# 세트 설정
 if "초급" in level:
     reps = "10회 × 3세트"
-    lv = "초급"
 elif "중급" in level:
     reps = "12회 × 4세트"
-    lv = "중급"
 else:
     reps = "15회 × 5세트"
-    lv = "고급"
 
-# 🔥 운동 데이터 (설명 + 이미지 포함)
-exercise_info = {
+# 🔥 운동 설명 + 이미지 경로
+exercise_data = {
 
 "벤치프레스":{
-"desc":"가슴 중앙을 자극하는 대표 운동. 가슴으로 밀어내는 느낌 중요!",
-"img":"https://images.unsplash.com/photo-1599058917212-d750089bc07e"
+"img":"images/bench.png",
+"desc":"""
+1. 벤치에 누워 발을 바닥에 고정합니다  
+2. 어깨보다 약간 넓게 바벨을 잡습니다  
+3. 가슴 중앙까지 천천히 내립니다  
+4. 가슴의 힘으로 밀어 올립니다  
+👉 팔이 아니라 가슴으로 밀어내는 느낌!
+"""
 },
 
 "인클라인 덤벨 프레스":{
-"desc":"윗가슴을 집중적으로 자극하는 운동",
-"img":"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61"
+"img":"images/incline.png",
+"desc":"""
+1. 벤치를 30~45도로 설정합니다  
+2. 덤벨을 들고 가슴 위에서 시작  
+3. 천천히 내려서 가슴을 늘려줍니다  
+4. 윗가슴으로 밀어 올립니다  
+👉 윗가슴 자극 집중!
+"""
 },
 
 "딥스":{
-"desc":"아랫가슴과 삼두를 동시에 자극",
-"img":"https://images.unsplash.com/photo-1594737625785-cb0bbd6c7c63"
+"img":"images/dips.png",
+"desc":"""
+1. 평행봉을 잡고 몸을 띄웁니다  
+2. 상체를 약간 앞으로 기울입니다  
+3. 팔을 굽혀 몸을 내립니다  
+4. 가슴과 삼두로 밀어 올립니다  
+👉 상체 기울이면 가슴 자극 ↑
+"""
 },
 
 "사이드 레터럴 레이즈":{
-"desc":"어깨 측면을 넓게 만들어주는 핵심 운동",
-"img":"https://images.unsplash.com/photo-1605296867304-46d5465a13f1"
+"img":"images/lateral.png",
+"desc":"""
+1. 덤벨을 들고 양옆에 둡니다  
+2. 팔을 옆으로 들어 올립니다  
+3. 어깨 높이까지만 올립니다  
+👉 반동 없이 천천히!
+"""
 },
 
 "프론트 레이즈":{
-"desc":"어깨 전면 발달",
-"img":"https://images.unsplash.com/photo-1581009137042-c552e485697a"
+"img":"images/front.png",
+"desc":"""
+1. 덤벨을 허벅지 앞에 둡니다  
+2. 팔을 앞으로 들어 올립니다  
+3. 어깨 높이까지 올립니다  
+👉 전면 어깨 집중
+"""
 },
 
 "리어 델트 플라이":{
-"desc":"어깨 후면 자극 (자세 중요!)",
-"img":"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b"
+"img":"images/rear.png",
+"desc":"""
+1. 허리를 숙이고 덤벨을 듭니다  
+2. 팔을 양옆으로 벌립니다  
+3. 후면 어깨에 집중  
+👉 등 말고 어깨 뒤쪽!
+"""
 },
 
 "랫풀다운":{
-"desc":"광배근을 넓게 만드는 기본 운동",
-"img":"https://images.unsplash.com/photo-1598970434795-0c54fe7c0642"
+"img":"images/latpulldown.png",
+"desc":"""
+1. 바를 넓게 잡습니다  
+2. 가슴 쪽으로 당깁니다  
+3. 천천히 올립니다  
+👉 팔이 아니라 등으로 당기기!
+"""
 },
 
 "바벨 로우":{
-"desc":"등 두께를 키워주는 운동",
-"img":"https://images.unsplash.com/photo-1605296867724-fa87a8ef7d12"
+"img":"images/row.png",
+"desc":"""
+1. 허리를 숙이고 바벨을 잡습니다  
+2. 배 쪽으로 당깁니다  
+3. 등을 수축합니다  
+👉 등 중앙 자극!
+"""
 },
 
 "덤벨 컬":{
-"desc":"이두근 기본 운동",
-"img":"https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e"
+"img":"images/curl.png",
+"desc":"""
+1. 덤벨을 양손에 듭니다  
+2. 팔꿈치를 고정하고 올립니다  
+3. 천천히 내립니다  
+👉 반동 금지!
+"""
 },
 
 "트라이셉스 푸쉬다운":{
-"desc":"삼두를 키우는 대표 운동",
-"img":"https://images.unsplash.com/photo-1605296867424-35fc25c9212a"
+"img":"images/triceps.png",
+"desc":"""
+1. 케이블을 잡습니다  
+2. 팔꿈치를 고정  
+3. 아래로 밀어냅니다  
+👉 삼두 수축 집중!
+"""
 }
 
 }
 
-# 루틴
+# 루틴 생성
 if st.button("🚀 루틴 생성"):
 
     st.balloons()
 
     st.markdown("## 💪 오늘의 운동")
 
-    routine = []
-
-    # 가슴
     if part == "가슴 🟥":
-        routine = ["인클라인 덤벨 프레스", "벤치프레스", "딥스"]
+        routine = ["인클라인 덤벨 프레스","벤치프레스","딥스"]
 
-    # 어깨
     elif part == "어깨 🟨":
-        routine = ["프론트 레이즈", "사이드 레터럴 레이즈", "리어 델트 플라이"]
+        routine = ["프론트 레이즈","사이드 레터럴 레이즈","리어 델트 플라이"]
 
-    # 등
     elif part == "등 🟦":
-        routine = ["랫풀다운", "바벨 로우"]
+        routine = ["랫풀다운","바벨 로우"]
 
-    # 팔
     elif part == "팔 💪":
         if arm_part == "이두 💪":
             routine = ["덤벨 컬"]
@@ -120,13 +163,15 @@ if st.button("🚀 루틴 생성"):
         st.markdown(f"### 🏋️ {ex}")
         st.write(f"👉 {reps}")
 
-        st.image(exercise_info[ex]["img"], width=300)
+        # 이미지 자리
+        st.image(exercise_data[ex]["img"], width=300)
 
-        st.info(exercise_info[ex]["desc"])
+        # 설명
+        st.info(exercise_data[ex]["desc"])
 
         st.markdown("---")
 
-    st.success("🔥 자세까지 완벽하면 진짜 성장 시작이다!")
+    st.success("🔥 자세까지 완벽하면 진짜 성장 시작!")
 
 st.markdown("---")
-st.caption("💪 운동 설명 포함 헬스 앱")
+st.caption("💪 헬스 루틴 + 운동 설명 앱")
