@@ -1,132 +1,184 @@
 import streamlit as st
 import random
 
-st.set_page_config(page_title="Training", page_icon="⚫", layout="centered")
+st.set_page_config(page_title="PT 루틴 + 튜토리얼", page_icon="💪")
 
-# 🎨 드라마틱 스타일
-st.markdown("""
-<style>
-body {
-    background-color: #0b0c10;
-}
-.block-container {
-    padding-top: 2rem;
-}
-.title {
-    font-size: 42px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-align: center;
-    color: #ffffff;
-}
-.subtitle {
-    text-align: center;
-    color: #8a8f98;
-    margin-bottom: 30px;
-}
-.section {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #c5c6c7;
-}
-.card {
-    background: #111217;
-    padding: 18px;
-    border-radius: 12px;
-    margin-bottom: 14px;
-    border-left: 3px solid #66fcf1;
-}
-.exercise {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
-}
-.meta {
-    font-size: 13px;
-    color: #66fcf1;
-    margin-top: 6px;
-}
-.desc {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #c5c6c7;
-    line-height: 1.6;
-}
-button[kind="primary"] {
-    background-color: #66fcf1 !important;
-    color: black !important;
-    font-weight: 600;
-}
-</style>
-""", unsafe_allow_html=True)
+st.title("💪 헬스 루틴 + 운동 튜토리얼")
+st.subheader("🔥 운동 방법까지 완벽하게 배우기")
 
-# 🎯 타이틀
-st.markdown('<div class="title">TRAINING SESSION</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">오늘의 루틴을 선택하세요</div>', unsafe_allow_html=True)
+st.markdown("---")
 
-# 선택
-level = st.selectbox("LEVEL", ["초급", "중급", "고급"])
-part = st.selectbox("FOCUS", ["가슴", "어깨", "등", "팔"])
+level = st.selectbox("📊 운동 수준", ["초급 🐣", "중급 🐥", "고급 🦅"])
+part = st.selectbox("🏋️ 운동 부위", ["가슴 🟥", "어깨 🟨", "등 🟦", "팔 💪"])
 
 arm_part = None
-if part == "팔":
-    arm_part = st.radio("DETAIL", ["이두", "삼두"])
+if part == "팔 💪":
+    arm_part = st.radio("💪 팔 선택", ["이두 💪", "삼두 🔥"])
+
+st.markdown("---")
 
 # 세트
-if level == "초급":
-    reps = "10 × 3"
-elif level == "중급":
-    reps = "12 × 4"
+if "초급" in level:
+    reps = "10회 × 3세트"
+    lv = "초급"
+elif "중급" in level:
+    reps = "12회 × 4세트"
+    lv = "중급"
 else:
-    reps = "15 × 5"
+    reps = "15회 × 5세트"
+    lv = "고급"
 
-# 튜토리얼
+# 🔥 운동 튜토리얼
 tutorial = {
-"벤치프레스":"가슴으로 밀어낸다. 어깨 개입 최소화.",
-"인클라인 프레스":"윗가슴을 수축한다.",
-"딥스":"상체를 기울이면 가슴 자극이 깊어진다.",
-"프론트 레이즈":"전면 삼각근 집중.",
-"사이드 레터럴":"반동 없이 측면 자극.",
-"리어 델트":"후면을 의식한다.",
-"랫풀다운":"광배로 당긴다.",
-"풀업":"몸을 끌어올린다.",
-"바벨 로우":"등 중앙을 수축한다.",
-"덤벨 컬":"이두 수축 유지.",
-"바벨 컬":"반동 없이 천천히.",
-"푸쉬다운":"삼두를 끝까지 밀어낸다.",
-"스컬 크러셔":"팔을 접었다 펴며 집중."
+
+"벤치프레스":"1. 벤치에 눕고 발 고정\n2. 바벨을 가슴까지 내림\n3. 가슴으로 밀어 올림\n👉 어깨 힘 X",
+
+"인클라인 덤벨 프레스":"1. 벤치 각도 30~45도\n2. 덤벨을 가슴 위에서 시작\n3. 천천히 내렸다 밀기\n👉 윗가슴 집중",
+
+"딥스":"1. 평행봉 잡고 몸 띄우기\n2. 상체 살짝 앞으로\n3. 내려갔다 밀기\n👉 가슴 자극",
+
+"머신 체스트 프레스":"1. 머신에 앉기\n2. 손잡이 잡기\n3. 앞으로 밀기\n👉 초보 추천",
+
+"푸쉬업":"1. 팔 어깨너비\n2. 몸 일직선 유지\n3. 내려갔다 밀기\n👉 기본기",
+
+"프론트 레이즈":"1. 덤벨 들고 시작\n2. 앞으로 들어올림\n3. 천천히 내림\n👉 전면 어깨",
+
+"사이드 레터럴 레이즈":"1. 양옆으로 들어올림\n2. 어깨 높이까지\n👉 반동 금지",
+
+"리어 델트 플라이":"1. 허리 숙이기\n2. 팔 옆으로 벌리기\n👉 후면 어깨",
+
+"덤벨 숄더 프레스":"1. 어깨 높이에서 시작\n2. 위로 밀기\n👉 전체 어깨",
+
+"랫풀다운":"1. 바를 넓게 잡기\n2. 가슴 쪽으로 당기기\n👉 등 사용",
+
+"풀업":"1. 바 잡고 매달리기\n2. 턱 위까지 당기기\n👉 광배",
+
+"바벨 로우":"1. 허리 숙이기\n2. 배로 당기기\n👉 등 중앙",
+
+"시티드 로우":"1. 앉아서 당기기\n2. 가슴 펴기\n👉 초보용",
+
+"덤벨 컬":"1. 팔꿈치 고정\n2. 들어올리기\n👉 이두",
+
+"바벨 컬":"1. 양손 바벨\n2. 천천히 올리기\n👉 반동 금지",
+
+"해머 컬":"1. 덤벨 세로로\n2. 들어올리기\n👉 팔 두께",
+
+"트라이셉스 푸쉬다운":"1. 케이블 잡기\n2. 아래로 밀기\n👉 삼두",
+
+"스컬 크러셔":"1. 누워서 시작\n2. 팔 굽혔다 펴기\n👉 삼두 집중",
+
+"오버헤드 익스텐션":"1. 머리 뒤에서 시작\n2. 위로 밀기\n👉 삼두"
 }
 
-# DB
+# 🔥 운동 DB
 db = {
-"가슴":["인클라인 프레스","벤치프레스","딥스"],
-"어깨":["프론트 레이즈","사이드 레터럴","리어 델트"],
-"등":["랫풀다운","풀업","바벨 로우"]
+
+"가슴 🟥":{
+"윗가슴":{
+"초급":["인클라인 덤벨 프레스"],
+"중급":["인클라인 덤벨 프레스"],
+"고급":["인클라인 덤벨 프레스"]
+},
+"중앙":{
+"초급":["머신 체스트 프레스","푸쉬업"],
+"중급":["벤치프레스"],
+"고급":["벤치프레스"]
+},
+"아랫가슴":{
+"초급":["푸쉬업"],
+"중급":["딥스"],
+"고급":["딥스"]
+}
+},
+
+"어깨 🟨":{
+"전면":{
+"초급":["프론트 레이즈"],
+"중급":["덤벨 숄더 프레스"],
+"고급":["덤벨 숄더 프레스"]
+},
+"측면":{
+"초급":["사이드 레터럴 레이즈"],
+"중급":["사이드 레터럴 레이즈"],
+"고급":["사이드 레터럴 레이즈"]
+},
+"후면":{
+"초급":["리어 델트 플라이"],
+"중급":["리어 델트 플라이"],
+"고급":["리어 델트 플라이"]
+}
+},
+
+"등 🟦":{
+"광배":{
+"초급":["랫풀다운"],
+"중급":["풀업"],
+"고급":["풀업"]
+},
+"중앙":{
+"초급":["시티드 로우"],
+"중급":["바벨 로우"],
+"고급":["바벨 로우"]
+}
+}
+
 }
 
 arm_db = {
-"이두":["덤벨 컬","바벨 컬"],
-"삼두":["푸쉬다운","스컬 크러셔"]
+
+"이두 💪":{
+"초급":["덤벨 컬"],
+"중급":["바벨 컬","해머 컬"],
+"고급":["바벨 컬","해머 컬"]
+},
+
+"삼두 🔥":{
+"초급":["트라이셉스 푸쉬다운"],
+"중급":["트라이셉스 푸쉬다운","오버헤드 익스텐션"],
+"고급":["스컬 크러셔","오버헤드 익스텐션"]
 }
 
-# 실행
-if st.button("START"):
+}
 
-    st.markdown('<div class="section">TODAY</div>', unsafe_allow_html=True)
+# 🚀 실행
+if st.button("🚀 루틴 생성"):
 
-    if part != "팔":
-        exercises = db[part]
-    else:
-        exercises = arm_db[arm_part]
+    st.balloons()
+    st.markdown("## 💪 오늘의 운동 + 튜토리얼")
 
-    for ex in exercises:
-        st.markdown(f"""
-        <div class="card">
-            <div class="exercise">{ex}</div>
-            <div class="meta">{reps}</div>
-            <div class="desc">{tutorial[ex]}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    # 가슴
+    if part == "가슴 🟥":
+        for k in db[part]:
+            ex = random.choice(db[part][k][lv])
+            st.markdown(f"### 🟥 {k} - {ex}")
+            st.write(f"👉 {reps}")
+            st.info(tutorial[ex])
 
-    st.markdown('<div class="section">END</div>', unsafe_allow_html=True)
+    # 어깨
+    elif part == "어깨 🟨":
+        for k in db[part]:
+            ex = random.choice(db[part][k][lv])
+            st.markdown(f"### 🟨 {k} - {ex}")
+            st.write(f"👉 {reps}")
+            st.info(tutorial[ex])
+
+    # 등
+    elif part == "등 🟦":
+        for k in db[part]:
+            ex = random.choice(db[part][k][lv])
+            st.markdown(f"### 🟦 {k} - {ex}")
+            st.write(f"👉 {reps}")
+            st.info(tutorial[ex])
+
+    # 팔
+    elif part == "팔 💪":
+        for ex in arm_db[arm_part][lv]:
+            st.markdown(f"### 💪 {ex}")
+            st.write(f"👉 {reps}")
+            st.info(tutorial[ex])
+
+    st.markdown("---")
+    st.success("🔥 이제 헬스장 가서 그대로 하면 된다.")
+
+st.markdown("---")
+st.caption("💪 PT 루틴 + 튜토리얼 앱")
